@@ -13,7 +13,9 @@ const jobSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    requirement:[{type:String}],
+    requirement:[
+        {type:String}
+    ],
     location:{
         type: String,
         required: true
@@ -34,6 +36,10 @@ const jobSchema = mongoose.Schema({
     createdBy:{
         type:mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        required:true
+    },
+    experienceLevel:{
+        type:Number,
         required:true
     },
     applications:[{
