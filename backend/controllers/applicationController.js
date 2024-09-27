@@ -126,9 +126,18 @@ const updateStatus = async(req,res)=>{
             message:"Status updated successfully",
             success:true
         });
-        
+
     } catch (error) {
         console.log(error);
         
     }
-} 
+} ;
+
+
+
+module.exports = {
+    applyJob,
+    getAppliedJobs,
+    getApplicants,
+    updateStatus
+}
