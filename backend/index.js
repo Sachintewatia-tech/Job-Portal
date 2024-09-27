@@ -8,6 +8,8 @@ const cookiParser = require("cookie-parser");
 const { connect } = require('./utils/db');
 const { userRoute } = require('./Routes/userRoutes');
 const { companyRoute } = require('./Routes/companyRoute');
+const { jobRoutes } = require('./Routes/jobRouts');
+const { applicationRouter } = require('./Routes/applicationRoutes');
 app.get("/",(req,res)=>{
     res.status(200).json({message:"welcome to backend"});
 });
@@ -22,10 +24,12 @@ const corsOption = {
 };
 app.use(cors(corsOption));
 
-// <-------------------------------api's---------------------->
+// <------------------------------- Routes or api's---------------------->
 
 app.use('/api/v1/user',userRoute);
 app.use('/api/v1/company',companyRoute);
+app.use('/api/v1/job',jobRoutes);
+app.use('/api/v1/application',applicationRouter);
 
 
 app.listen(process.env.port||3000,()=>{
