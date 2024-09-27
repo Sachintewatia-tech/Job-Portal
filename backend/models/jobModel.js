@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const jobSchema = mongoose.Schema({
-    title:{
+    title: {
         type: String,
         required: true
     },
@@ -9,47 +9,47 @@ const jobSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    salary:{
+    salary: {
         type: Number,
         required: true
     },
-    requirement:[
-        {type:String}
+    requirement: [
+        { type: String }
     ],
-    location:{
+    location: {
         type: String,
         required: true
     },
-    jobType:{
+    jobType: {
         type: String,
         required: true
     },
-    position:{
+    position: {
         type: Number,
         required: true
     },
-    company:{
-        type:mongoose.Schema.Types.ObjectId,
+    company: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Company',
-        required:true
+        required: true
     },
-    createdBy:{
-        type:mongoose.Schema.Types.ObjectId,
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required:true
+        required: true
     },
-    experienceLevel:{
-        type:Number,
-        required:true
+    experienceLevel: {
+        type: Number,
+        required: true
     },
-    applications:[{
-        type:mongoose.Schema.Types.ObjectId,
+    applications: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Application',
     }]
-},{timestamps:true});
+}, { timestamps: true });
 
-const JobModel = mongoose.model("job",jobSchema);
+const JobModel = mongoose.model("Job", jobSchema); 
 
 module.exports = {
- JobModel   
-}
+    JobModel
+};
