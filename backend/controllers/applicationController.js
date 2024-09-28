@@ -43,34 +43,44 @@ const applyJob = async(req,res)=>{
 };
 
 
-const getAppliedJobs = async(req,res)=>{
+const getAppliedJobs = async (req, res) => {
     try {
         const userId = req.id;
-        const application = await Application.find({applicant:userId}).sort({createdAt:-1}).populate({
-            path:"job",
-            options:{sort:{createdAt:-1}},
-            populate:{
-                path:"company",
-                options:{sort:{createdAt:-1}}
-            }
-        });
-        if(!application){
+
+        const applications = await Application.find({ applicant: userId })
+            .sort({ createdAt: -1 })
+            .populate({
+                path: "job",
+                options: { sort: { createdAt: -1 } },
+                populate: {
+                    path: "company",
+                    options: { sort: { createdAt: -1 } }
+                }
+            });
+
+        if (!applications || applications.length === 0) {
             return res.status(404).json({
-                message:"No Applications",
-                success:false
-            })
+                message: "No applications found",
+                success: false
+            });
         }
 
         return res.status(200).json({
-            application,
-            success:true
-        })
+            applications, 
+            success: true
+        });
 
     } catch (error) {
-        console.log(error);
-        
+        console.error("Error fetching applied jobs:", error);
+
+        return res.status(500).json({
+            message: "An error occurred while fetching applications",
+            success: false,
+            error: error.message
+        });
     }
 };
+
 
 
 const getApplicants = async(req,res)=>{
