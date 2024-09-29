@@ -44,11 +44,11 @@ const SignUp = () => {
                     <Input accept='image/*' type='file' className='cursor-pointer'  />
                 </div>
             </div>
-            <Button type='submit' variant='outline' className='w-full my-4'>Sign Up</Button>
+            <Button type='submit' variant='outline' className='w-full my-4 bg-[#007bff] hover:bg-[#0568d1]'>Sign Up</Button>
         </form>
       </div>
     </div>
   )
 }
 
-export default SignUp
+export default SignUp;
