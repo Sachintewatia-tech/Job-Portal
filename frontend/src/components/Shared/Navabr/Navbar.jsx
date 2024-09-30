@@ -3,14 +3,15 @@ import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { LogOut, User2 } from 'lucide-react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const user = false;
+    const navigate = useNavigate();
   return (
     <div className='bg-white'>
         <div className='flex items-center justify-between mx-auto max-w-6xl h-16'>
-            <div>
+            <div className='cursor-pointer' onClick={()=>navigate('/')}>
                 <h1 className='text-2xl font-bold'>Job<span className='text-[#F83002]'>Portal</span></h1>
             </div>
             <div className='flex items-center gap-12'>
@@ -22,12 +23,8 @@ const Navbar = () => {
                 {
                     !user ? (
                         <div className='flex items-center gap-2'>
-                            <Button variant='outline'>
-                                <Link to={'/login'}>Login</Link>
-                            </Button>
-                            <Button className='bg-[#0283de] hover:bg-[#0568d1]'>
-                                <Link to={'/signup'}>SignUp</Link>
-                            </Button>
+                            <Link to={'/login'}> <Button variant='outline'>Login</Button> </Link>
+                            <Link to={'/signup'}><Button className='bg-[#0283de] hover:bg-[#0568d1]' variant='outline'>SignUp</Button></Link>
                         </div>
                     ) :
                 

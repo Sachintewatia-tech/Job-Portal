@@ -6,7 +6,7 @@ const jwt = require ('jsonwebtoken')
 // <--------------------------- Register controller ------------------------>
 const register = async (req, res) => {
     try {
-      const { fullname, email, mobile, password, role } = req.body;
+      const { fullname, email, mobile, password, role } = req.body;      
   
       // Check if required fields are present
       if (!fullname || !email || !password || !mobile || !role) {
