@@ -8,6 +8,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { USER_API_ENDPOINT } from '@/Utils/constant'
 import { toast } from 'sonner'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLoading } from '@/Redux/authSlice'
+import { Loader2 } from 'lucide-react'
 
 const SignUp = () => {
     const [input,setInput] = useState({
@@ -18,6 +21,8 @@ const SignUp = () => {
         file:"",
         password:""
     });
+    const dispatch = useDispatch();
+    const {loading} = useSelector(store=>store.auth);
     const naviagte = useNavigate();
     const changeEvent = (e)=>{
         setInput({...input,[e.target.name]:e.target.value});
@@ -37,6 +42,7 @@ const SignUp = () => {
         }
         formData.append("file",input.file);
         try {
+            dispatch(setLoading(true));
             const res = await axios.post(`${USER_API_ENDPOINT}/user/register`,formData,{
                 headers:{
                    "Content-Type":"multipart/form-data"
@@ -50,8 +56,9 @@ const SignUp = () => {
                 naviagte('/login')
             }
         } catch (error) {
-            console.log(error);
             toast.error(error.response.data.message);
+        } finally{
+            dispatch(setLoading(false));
         }
         
     }
@@ -59,7 +66,7 @@ const SignUp = () => {
     <div>
       <Navbar/>
       <div className='flex items-center justify-center max-w-7xl mx-auto'>
-        <form onSubmit={submitHandler} className='w-1/3 border border-gray-200 rounded-md p-4 my-10'>
+        <form onSubmit={submitHandler} className='shadow-custom-light w-1/3 border border-gray-200 rounded-md p-4 my-10'>
             <h1 className='font-bold text-xl mb-5'>Sign Up</h1>
             <div>
             <Label>Full Name</Label>
@@ -109,7 +116,11 @@ const SignUp = () => {
                 </RadioGroup>
                 
             </div>
-            <Button type='submit' variant='outline' className='w-full my-4 bg-[#007bff] hover:bg-[#0568d1]'>Sign Up</Button>
+            {
+                loading ? <Button className='w-full my-4' disabled> <Loader2 className='mr-2 h-4 w-4 animate-spin'/>Please wait... </Button>:
+                    <Button type='submit' variant='outline' className='w-full my-4 bg-[#007bff] hover:bg-[#0568d1]'>Sign Up</Button>
+
+            }
             <span>Already have an account? <Link to={'/login'}>Login</Link> </span>
         </form>
       </div>

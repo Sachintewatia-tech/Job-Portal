@@ -8,11 +8,15 @@ module.exports = {
   important: true,
   theme: {
   	extend: {
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		},
+		borderRadius: {
+			lg: '12px', 
+			md: '8px', 
+			sm: '4px', 
+		  },
+		  boxShadow: {
+			'custom-light': '0 4px 6px rgba(0, 0, 0, 0.1)',
+			'custom-dark': '0 10px 15px rgba(0, 0, 0, 0.3)',
+		  },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
