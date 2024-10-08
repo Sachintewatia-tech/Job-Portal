@@ -9,7 +9,7 @@ import axios from 'axios'
 import { USER_API_ENDPOINT } from '@/Utils/constant'
 import { toast } from 'sonner'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLoading } from '@/Redux/authSlice'
+import { setLoading, setUser } from '@/Redux/authSlice'
 import { Loader2 } from 'lucide-react'
 
 const Login = () => {
@@ -37,6 +37,7 @@ const submitHandler = async (e)=>{
           withCredentials:true,
       });
       if(res.data.success){
+          dispatch(setUser(res.data.user));
           toast.success(res.data.message);
           navigate('/');
       }
